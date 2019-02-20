@@ -11,5 +11,8 @@ val branches   = forEachRef.out.lines map (_.tail.init.drop(refsHeads.length))
 val results    = branches map f
 val longest    = branches maxBy (_.length)
 val display    = results map (r => r._1.padTo(longest.length, ' ') -> r._2)
+val line       = () => printf("  %s%n", "".padTo(longest.length + 14, '-'))
 
-display.foreach(r => printf("  | %s | behind %2s | ahead %2s |%n", r._1, r._2(0), r._2(1)))
+line()
+display.foreach(r => printf("  | %s | %2s | %2s |%n", r._1, r._2(0), r._2(1)))
+line()
